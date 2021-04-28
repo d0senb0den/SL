@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">SL info</h1>
+
+    <form method="get">
+        <input type="text" id="location" name="location" />
+        <input type="submit" value="Sök" />
+    </form>
+
+    @foreach (var hpl in Model.hpl.ResponseData)
+    {
+        <a href="?siteid=@hpl.SiteId">@hpl.Name</a><br>
+    }
+
+<table class="text-center">
+    @if (Model.departure.ResponseData != null)
+    {
+        <tr><td><p>Buss</p></td></tr>
+        foreach (var bus in Model.departure.ResponseData.Buses)
+        {
+            <tr>
+
+                <td class="text-left">
+                    @bus.DisplayTime
+                </td>
+                <td class="text-left">
+                    @bus.LineNumber
+                </td>
+
+
+
+                <td class="text-left">
+                    @bus.Destination
+                </td>
+            </tr>
+        }
+        <tr><td><p>Tåg</p></td></tr>
+        foreach (var train in Model.departure.ResponseData.Trains)
+        {
+            <tr>
+                <td class="text-left">
+                    @train.DisplayTime
+                </td>
+                <td class="text-left">
+                    @train.LineNumber
+                </td>
+
+
+
+                <td class="text-left">
+                    @train.Destination
+                </td>
+            </tr>
+        }
+        <tr><td><p>Tunnelbana</p></td></tr>
+        foreach (var metro in Model.departure.ResponseData.Metros)
+        {
+            <tr>
+                <td class="text-left">
+                    @metro.DisplayTime
+                </td>
+                <td class="text-left">
+                    @metro.LineNumber
+                </td>
+
+
+
+                <td class="text-left">
+                    @metro.Destination
+                </td>
+            </tr>
+        }
+    }
+</table>
+</div>
